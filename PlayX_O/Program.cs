@@ -6,7 +6,6 @@ int countO = 0;
 int countX = 0;
 int vonO, vonX;
 
-
 string[,] mas = new string[str, column];
 
 for (int i = 0; i < str; i++)
