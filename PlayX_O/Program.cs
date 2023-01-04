@@ -71,6 +71,10 @@ void Move(char[,] field, ref int moveCount, char sign)
     Console.Clear();
 }
 
+bool CheckDraw(int moveCount, bool countX, bool countO) 
+{
+    return moveCount > 7 && countX && countO;
+}
 // ------------------------------------------
 
 bool countX = true;
@@ -86,7 +90,7 @@ DrawingField(field);
 Write("Введите координату клетки для хода X");
 Move(field, ref moveCount, (char)Constants.singX);
 
-while (moveCount <= 9 && CheckEndGame(countX, countO))
+while (moveCount < 9 && CheckEndGame(countX, countO))
 {
     DrawingField(field);
 
@@ -116,8 +120,9 @@ while (moveCount <= 9 && CheckEndGame(countX, countO))
     }
 }
 
-if (moveCount > 7 && countX && countO)
+if (CheckDraw(moveCount, countX, countO))
 {
     Write("Нету выйгрывшых комбинаций");
     DrawingField(field);
+    Console.ReadKey)();
 }
