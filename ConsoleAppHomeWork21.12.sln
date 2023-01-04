@@ -9,7 +9,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SecondEx", "ConsoleApp1\Sec
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleAppTrain", "ConsoleAppTrain\ConsoleAppTrain.csproj", "{62AEFD95-30F1-4A74-9710-68246C951DC2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlayX_O", "PlayX_O\PlayX_O.csproj", "{BD9841BF-3531-4357-B794-25C2B4BACC38}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PlayX_O", "PlayX_O\PlayX_O.csproj", "{BD9841BF-3531-4357-B794-25C2B4BACC38}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleAppMas1", "ConsoleAppMas1\ConsoleAppMas1.csproj", "{076C2606-CE6D-4FFF-86CC-65357CC03BF6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleAppMas2", "ConsoleAppMas2\ConsoleAppMas2.csproj", "{87929506-E0FE-4BFD-894B-23E5871F1AFA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +37,14 @@ Global
 		{BD9841BF-3531-4357-B794-25C2B4BACC38}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BD9841BF-3531-4357-B794-25C2B4BACC38}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BD9841BF-3531-4357-B794-25C2B4BACC38}.Release|Any CPU.Build.0 = Release|Any CPU
+		{076C2606-CE6D-4FFF-86CC-65357CC03BF6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{076C2606-CE6D-4FFF-86CC-65357CC03BF6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{076C2606-CE6D-4FFF-86CC-65357CC03BF6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{076C2606-CE6D-4FFF-86CC-65357CC03BF6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{87929506-E0FE-4BFD-894B-23E5871F1AFA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{87929506-E0FE-4BFD-894B-23E5871F1AFA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{87929506-E0FE-4BFD-894B-23E5871F1AFA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{87929506-E0FE-4BFD-894B-23E5871F1AFA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

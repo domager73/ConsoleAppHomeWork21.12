@@ -1,133 +1,123 @@
-﻿int column = 3;
-int str = 3;
-int stepX, stepY, step;
-int count = 0;
-int countO = 0;
-int countX = 0;
-int vonO, vonX;
+﻿using PlayX_O;
 
-string[,] mas = new string[str, column];
-
-for (int i = 0; i < str; i++)
+bool SeachVictoryO(char[,] mas)
 {
-    for (int j = 0; j < column; j++)
-    {
-        mas[i, j] = "*";
-    }
+    return mas[0, 0] == 'O' && mas[0, 1] == 'O' && mas[0, 2] == 'O' ||
+        mas[1, 0] == 'O' && mas[1, 1] == 'O' && mas[1, 2] == 'O' ||
+        mas[2, 0] == 'O' && mas[2, 1] == 'O' && mas[2, 2] == 'O' ||
+        mas[0, 0] == 'O' && mas[1, 0] == 'O' && mas[2, 0] == 'O' ||
+        mas[0, 1] == 'O' && mas[1, 1] == 'O' && mas[2, 1] == 'O' ||
+        mas[0, 2] == 'O' && mas[1, 2] == 'O' && mas[2, 2] == 'O' ||
+        mas[0, 0] == 'O' && mas[1, 1] == 'O' && mas[2, 2] == 'O' ||
+        mas[0, 2] == 'O' && mas[1, 1] == 'O' && mas[2, 0] == 'O';
+};
+
+bool SeachVictoryX(char[,] mas)
+{
+    return mas[0, 0] == 'X' && mas[0, 1] == 'X' && mas[0, 2] == 'X' ||
+        mas[1, 0] == 'X' && mas[1, 1] == 'X' && mas[1, 2] == 'X' ||
+        mas[2, 0] == 'X' && mas[2, 1] == 'X' && mas[2, 2] == 'X' ||
+        mas[0, 0] == 'X' && mas[1, 0] == 'X' && mas[2, 0] == 'X' ||
+        mas[0, 1] == 'X' && mas[1, 1] == 'X' && mas[2, 1] == 'X' ||
+        mas[0, 2] == 'X' && mas[1, 2] == 'X' && mas[2, 2] == 'X' ||
+        mas[0, 0] == 'X' && mas[1, 1] == 'X' && mas[2, 2] == 'X' ||
+        mas[0, 2] == 'X' && mas[1, 1] == 'X' && mas[2, 0] == 'X';
 }
 
-for (int k = 0; k < str; k++)
+void CreateField(char[,] field)
 {
-    for (int j = 0; j < column; j++)
-    {
-        Console.Write(mas[k, j] + " ");
-    }
-    Console.WriteLine();
-}
-Console.WriteLine("Введите координату клетки для хода X");
-step = int.Parse(Console.ReadLine()) - 1;
-mas[step / 3, step % 3] = "X";
-Console.Clear();
+    int str = field.GetLength(0);
+    int column = field.GetLength(1);
 
-while (countX + countO < 8)
-{
-    for (int k = 0; k < str; k++)
+    for (int i = 0; i < str; i++)
     {
         for (int j = 0; j < column; j++)
         {
-            Console.Write(mas[k, j] + " ");
+            field[i, j] = (char)Constants.Star;
+        }
+    }
+}
+
+void DrawingField(char[,] field)
+{
+    int str = field.GetLength(0);
+    int column = field.GetLength(1);
+
+    for (int i = 0; i < str; i++)
+    {
+        for (int j = 0; j < column; j++)
+        {
+            Console.Write(field[i, j] + " ");
         }
         Console.WriteLine();
     }
-    Console.WriteLine("Введите координату клетки для хода X");
-    step = int.Parse(Console.ReadLine()) - 1;
-    countO++;
-    mas[step / 3, step % 3] = "O";
+}
+
+bool CheckEndGame(bool countX, bool countO)
+{
+    return countX && countO == true;
+}
+
+void Write(string title)
+{
+    Console.WriteLine(title);
+};
+
+void Move(char[,] field, ref int moveCount, char sign)
+{
+    int step = int.Parse(Console.ReadLine()) - 1;
+    field[step / 3, step % 3] = sign;
+    moveCount++;
     Console.Clear();
-    if (mas[0, 0] == "O" && mas[0, 1] == "O" && mas[0, 2] == "O" ||
-        mas[1, 0] == "O" && mas[1, 1] == "O" && mas[1, 2] == "O" ||
-        mas[2, 0] == "O" && mas[2, 1] == "O" && mas[2, 2] == "O" ||
-        mas[0, 0] == "O" && mas[1, 0] == "O" && mas[2, 0] == "O" ||
-        mas[0, 1] == "O" && mas[1, 1] == "O" && mas[2, 1] == "O" ||
-        mas[0, 2] == "O" && mas[1, 2] == "O" && mas[2, 2] == "O" ||
-        mas[0, 0] == "O" && mas[1, 1] == "O" && mas[2, 2] == "O" ||
-        mas[0, 2] == "O" && mas[1, 1] == "O" && mas[2, 0] == "O")
+}
+
+// ------------------------------------------
+
+bool countX = true;
+bool countO = true;
+int moveCount = 0;
+
+char[,] field = new char[(int)Constants.str, (int)Constants.column];
+
+CreateField(field);
+
+DrawingField(field);
+
+Write("Введите координату клетки для хода X");
+Move(field, ref moveCount, (char)Constants.singX);
+
+while (moveCount <= 9 && CheckEndGame(countX, countO))
+{
+    DrawingField(field);
+
+    Write("Введите координату клетки для хода O");
+    Move(field, ref moveCount, (char)Constants.singO);
+
+    if (SeachVictoryO(field))
     {
-        Console.WriteLine("Выйграли O");
-        countO += 5;
-        for (int k = 0; k < str; k++)
-        {
-            for (int j = 0; j < column; j++)
-            {
-                Console.Write(mas[k, j] + " ");
-            }
-            Console.WriteLine();
-        }
+        Write("Выйграли O");
+        DrawingField(field);
+        countO = false;
     }
 
-    if (countO + countX <= 8)
+    if (CheckEndGame(countX, countO))
     {
-        for (int k = 0; k < str; k++)
-        {
-            for (int j = 0; j < column; j++)
-            {
-                Console.Write(mas[k, j] + " ");
-            }
-            Console.WriteLine();
-        }
+        DrawingField(field);
 
-        Console.WriteLine("Введите координату клетки для хода O");
-        step = int.Parse(Console.ReadLine()) - 1;
-        mas[step / 3, step % 3] = "X";
-        Console.Clear();
+        Write("Введите координату клетки для хода X");
+        Move(field, ref moveCount, (char)Constants.singX);
     }
 
-    if (countO + countX <= 8)
+    if (SeachVictoryX(field))
     {
-        for (int k = 0; k < str; k++)
-        {
-            for (int j = 0; j < column; j++)
-            {
-                Console.Write(mas[k, j] + " ");
-            }
-            Console.WriteLine();
-        }
-        countX++;
-        Console.Clear();
-    }
-
-    if (mas[0, 0] == "X" && mas[0, 1] == "X" && mas[0, 2] == "X" ||
-        mas[1, 0] == "X" && mas[1, 1] == "X" && mas[1, 2] == "X" ||
-        mas[2, 0] == "X" && mas[2, 1] == "X" && mas[2, 2] == "X" ||
-        mas[0, 0] == "X" && mas[1, 0] == "X" && mas[2, 0] == "X" ||
-        mas[0, 1] == "X" && mas[1, 1] == "X" && mas[2, 1] == "X" ||
-        mas[0, 2] == "X" && mas[1, 2] == "X" && mas[2, 2] == "X" ||
-        mas[0, 0] == "X" && mas[1, 1] == "X" && mas[2, 2] == "X" ||
-        mas[0, 2] == "X" && mas[1, 1] == "X" && mas[2, 0] == "X")
-    {
-        Console.WriteLine("Выйграли X");
-        countX += 5;
-        for (int k = 0; k < str; k++)
-        {
-            for (int j = 0; j < column; j++)
-            {
-                Console.Write(mas[k, j] + " ");
-            }
-            Console.WriteLine();
-        }
+        Write("Выйграли X");
+        DrawingField(field);
+        countX = false;
     }
 }
 
-if (countX + countO == 8)
+if (moveCount > 7 && countX && countO)
 {
-    Console.WriteLine("Нету выйгрывшых комбинаций");
-    for (int k = 0; k < str; k++)
-    {
-        for (int j = 0; j < column; j++)
-        {
-            Console.Write(mas[k, j] + " ");
-        }
-        Console.WriteLine();
-    }
-    Console.ReadLine();
+    Write("Нету выйгрывшых комбинаций");
+    DrawingField(field);
 }
