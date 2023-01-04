@@ -124,5 +124,5 @@ if (CheckDraw(moveCount, countX, countO))
 {
     Write("Нету выйгрывшых комбинаций");
     DrawingField(field);
-    Console.ReadKey)();
+    Console.ReadKey();
 }
