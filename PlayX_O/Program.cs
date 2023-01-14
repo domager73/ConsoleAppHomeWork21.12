@@ -61,20 +61,38 @@ bool CheckEndGame(bool countX, bool countO)
 void Write(string title)
 {
     Console.WriteLine(title);
-};
+}
 
 void Move(char[,] field, ref int moveCount, char sign)
 {
-    int step = int.Parse(Console.ReadLine()) - 1;
+    int step = CheckValue(1, 9);
     field[step / 3, step % 3] = sign;
     moveCount++;
-    Console.Clear();
 }
 
 bool CheckDraw(int moveCount, bool countX, bool countO) 
 {
     return moveCount > 7 && countX && countO;
 }
+
+int CheckValue(int frontMany, int untilMany)
+{
+    bool isCorrectInput;
+    int number;
+
+    do
+    {
+        isCorrectInput = true;
+        number = int.Parse(Console.ReadLine());
+        if (number < frontMany || number > untilMany)
+        {
+            isCorrectInput = false;
+            Console.WriteLine("Вы ввелим не точное значение, введите его заново");
+        }
+    } while (isCorrectInput == false);
+    return number - 1;
+}
+
 // ------------------------------------------
 
 bool countX = true;
@@ -89,6 +107,7 @@ DrawingField(field);
 
 Write("Введите координату клетки для хода X");
 Move(field, ref moveCount, (char)Constants.singX);
+Console.Clear();
 
 while (moveCount < 9 && CheckEndGame(countX, countO))
 {
@@ -96,6 +115,7 @@ while (moveCount < 9 && CheckEndGame(countX, countO))
 
     Write("Введите координату клетки для хода O");
     Move(field, ref moveCount, (char)Constants.singO);
+    Console.Clear();
 
     if (SeachVictoryO(field))
     {
@@ -110,6 +130,7 @@ while (moveCount < 9 && CheckEndGame(countX, countO))
 
         Write("Введите координату клетки для хода X");
         Move(field, ref moveCount, (char)Constants.singX);
+        Console.Clear();
     }
 
     if (SeachVictoryX(field))
